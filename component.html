@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>hello world</title>
+		<script src="vue.js"></script>
+	</head>
+	<body>
+		<!-- 全局组件 -->
+		<div id="app">
+			<input type="text" v-model="inputValue"/>
+			<!-- <button @click="handleBtnClick"> 提交 </button> -->
+			<button v-on:click="handleBtnClick"> 提交 </button>
+			<ol>
+				<!-- 父组件 -->
+				<todo-item  v-for="(item,index) in list" 
+							v-bind:content="item"
+							v-bind:index="index"
+							@delete="handleItemDelete">
+				</todo-item>
+			</ol>
+		</div>
+		
+		
+		<script>
+			
+			// 定义全局组件
+			// Vue.component("TodoItem",{
+			// 	props:['content'],  //外部传进来的数据
+			// 	template:"<li>{{content}}</li>" //子组件模板
+			// })
+			
+			//定义局部子组件
+			var TodoItem = {
+				props:['content'],  //外部父组件传进来的数据
+				template:"<li @click='handleItemClick'>{{content}}</li>" ,//子组件模板
+				methods:{
+					handleItemClick:function(){
+						this.$emit("delete",this.index);
+					}
+				}
+			}
+			
+			var app = new Vue({
+				el:'#app',
+				data:{
+					list:[],
+					inputValue:''
+				},
+				//局部组件需要注册
+				components:{
+					TodoItem:TodoItem
+				},
+				methods:{
+					handleBtnClick:function(){
+						// 添加数据到list
+						this.list.push(this.inputValue)
+						//清空输入框
+						this.inputValue=''
+					},
+					handleItemDelete:function(index){
+						// alert('dddd')
+						this.list.splice(index,1);
+					}
+				}
+			})
+			
+		</script>
+		
+	</body>
+</html>

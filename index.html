@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>hello world</title>
+		<script src="vue.js"></script>
+	</head>
+	<body>
+		<!-- mvvm设计模式 -->
+		<div id="app">
+			<input type="text" v-model="inputValue"/>
+			<button @click="handleBtnClick"> 提交 </button>
+			<button v-on:click="handleBtnClick"> 提交 </button>
+			<ol>
+				<li v-for="item in list">{{item}}</li>
+			</ol>
+		</div>
+		
+		<script>
+			var app = new Vue({
+				el:'#app',
+				data:{
+					list:[],
+					inputValue:''
+				},
+				methods:{
+					handleBtnClick:function(){
+						// 添加数据到list
+						this.list.push(this.inputValue)
+						//清空输入框
+						this.inputValue=''
+					}
+				}
+			})
+			
+		</script>
+	</body>
+</html>
