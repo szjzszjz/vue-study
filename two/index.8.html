@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>vue 中列表渲染</title>
+		<script src="../vue.js"></script>
+
+	</head>
+	<body>
+
+		<!-- <div id="app">
+			<div v-for="(item,index) of list">
+				{{item}}--{{index}}
+			</div>
+		</div>
+		
+		<script>
+			var vm = new Vue({
+				el:'#app',
+				data:{
+					list:[
+						"hello",
+						"world",
+						"ni",
+						"hao"
+					]
+				}
+			})
+		</script> -->
+
+
+		<!-- <div id="app">
+			<div v-for="(item,index) of list" :key="item.id">
+				{{item.text}}--{{index}}
+			</div>
+		</div>
+
+		<script>
+			var vm = new Vue({
+				el: '#app',
+				data: {
+					list: [{
+							id: "0101",
+							text: "hello",
+						},
+						{
+							id: "0102",
+							text: "ni",
+						},
+						{
+							id: "0103",
+							text: "hao",
+						},
+
+					]
+				}
+			})
+		</script> -->
+
+
+		<!-- template 标签并不在页面上做渲染 -->
+		<!-- <div id="app">
+			<template v-for="(item,index) of list" :key="item.id">
+				<div>{{item.text}}--{{index}}</div>
+				<span>{{item.text}}</span>
+			</template>
+		</div>
+		
+		<script>
+			var vm = new Vue({
+				el: '#app',
+				data: {
+					list: [{
+							id: "0101",
+							text: "hello",
+						},
+						{
+							id: "0102",
+							text: "ni",
+						},
+						{
+							id: "0103",
+							text: "hao",
+						},
+		
+					]
+				}
+			})
+		</script> -->
+
+		<!-- 遍历对象 -->
+		<!-- 在控制台 通过 
+		Vue.set(vm.userInfo ,"address" , "beijing")  ||
+		vm.$set(vm.userInfo,"address","beijing")
+		给对象添加属性 -->
+		<!-- <div id="app">
+			<div v-for="(item ,key,index) of userInfo">
+				{{item}}---{{key}}---{{index}}
+			</div>
+		</div>
+
+		<script>
+			var vm = new Vue({
+				el: '#app',
+				data: {
+					userInfo: {
+						name: "战三",
+						age: 23,
+						gender: "male",
+					}
+				}
+			})
+		</script> -->
+		
+		<!-- 遍历数组 -->
+		<!-- 在控制台 通过 
+		Vue.set(vm.list ,1 , 1)  ||
+		vm.$set(vm.list ,1 , 1)
+		实现对数组元素的改变 -->
+		<div id="app">
+			<div v-for="(item ,index) of list">
+				{{item}}
+			</div>
+		</div>
+		
+		<script>
+			var vm = new Vue({
+				el: '#app',
+				data: {
+					list:[
+						1,
+						2,
+						3
+					]
+				}
+			})
+		</script>
+	</body>
+</html>

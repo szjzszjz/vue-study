@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="../vue.js"></script>
+		<title>父子组件传值</title>
+	</head>
+	<body>
+
+
+		<!-- 单向数据流：子组件不能直接修改父组件传过来的数据 -->
+		<div id="app">
+			<counter :count="1" @inc="handleInc"></counter>
+			<counter :count="2" @inc="handleInc"></counter>
+			<div>{{total}}</div>
+		</div>
+
+		<script>
+			//子组件 不能直接对父组件传过来的属性进行值的变更 
+			var counter = {
+				props: ['count'],
+				data: function() {
+					return {
+						number: this.count
+					}
+				},
+				template: '<div @click="handleClick"> {{number}} </div>',
+				methods: {
+					handleClick: function() {
+						this.number = this.number + 2;
+						this.$emit('inc', 2);
+					}
+				}
+			}
+
+			//父组件
+			var vm = new Vue({
+				el: '#app',
+				data: {
+					total: 3
+				},
+				components: {
+					counter: counter
+				},
+				methods: {
+					handleInc: function(step) {
+						this.total += step;
+					}
+				}
+			})
+		</script>
+
+	</body>
+</html>

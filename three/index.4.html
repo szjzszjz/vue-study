@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="../vue.js"></script>
+		<title>非父子组件传值(Bus/总线/发布订阅模式/观察者模式)</title>
+	</head>
+	<body>
+
+
+		<div id="root">
+			<child content="hello"></child>
+			<child content="world"></child>
+		</div>
+
+		<script>
+			//在vue实例上绑定bus 
+			Vue.prototype.bus = new Vue()
+
+			//子组件
+			Vue.component('child', {
+				data: function() {
+					return {
+						selfContent: this.content
+					}
+				},
+				props: {
+					content: String
+				},
+				template: "<div @click='handleClick'>{{selfContent}}</div>",
+				methods: {
+					handleClick: function() {
+						// alert(this.content)
+						console.log("before")
+						this.bus.$emit('change', this.selfContent)
+						console.log(this.selfContent)
+
+					}
+				},
+
+				//钩子方法 渲染好页面之后调用该方法
+				mounted: function() {
+					var this_ = this
+					//监听change 方法 
+					this.bus.$on("change", function(msg) {
+						this_.selfContent = msg
+						console.log(this_.selfContent)
+					})
+				}
+			})
+
+			//父组件
+			var vm = new Vue({
+				el: '#root',
+			})
+		</script>
+
+	</body>
+</html>

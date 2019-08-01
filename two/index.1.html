@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Vue实例生命周期函数</title>
+		<script src="../vue.js"></script>
+	</head>
+	<body>
+		
+		<div id="app">{{message}}</div>
+		<!-- <div id="app"></div> -->
+
+		<script>
+			
+			//生命周期函数就是vue 实例在某一个时间点会自动执行的函数
+			//共有8个生命周期函数
+			//vue 的生命周期函数不放在Methods 属性中
+			var vm = new Vue({
+				el:"#app",
+				template:"<div>{{message}}</div>",  //有模板以模板为准，否则以data为准 
+				data:{
+					message:"test"
+				},
+				//实例创建之前
+				beforeCreate:function(){
+					console.log("实例创建之前 beforCreate")
+				},
+				//实例创建之后
+				created:function(){ 
+					console.log("实例创建之后 create")
+				},
+				//页面渲染之前
+				beforeMount:function(){
+					console.log("页面渲染之前 berforMount")
+					console.log(this.$el)
+				},
+				//页面渲染之后
+				mounted:function(){
+					console.log("页面渲染之后 mount")
+					console.log(this.$el)
+				},
+				//组件被销毁之前
+				//当调用 vm.$destroy() 的时候执行销毁的方法
+				beforeDestroy:function(){
+					console.log("组件被销毁之前 beforDestory")
+				},
+				//组件被销毁之后
+				destroyed:function(){
+					console.log("组件被销毁之后 destroyed")
+				},
+				//数据更新之前
+				//当调用 vm.$data.message = 'hello' 改变数据时执行更新方法
+				beforeUpdate:function(){
+					console.log("数据更新之前 beforeUpdate")
+				},
+				//数据更新之后
+				updated:function(){
+					console.log("数据更新之后 updated")
+				}
+			})
+			
+		</script>
+	</body>
+</html>

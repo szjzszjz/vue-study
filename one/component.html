@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>hello world</title>
-		<script src="vue.js"></script>
+		<script src="../vue.js"></script>
 	</head>
 	<body>
 		<!-- 全局组件 -->
@@ -32,7 +32,7 @@
 			
 			//定义局部子组件
 			var TodoItem = {
-				props:['content'],  //外部父组件传进来的数据
+				props:['content','index'],  //外部父组件传进来的数据
 				template:"<li @click='handleItemClick'>{{content}}</li>" ,//子组件模板
 				methods:{
 					handleItemClick:function(){

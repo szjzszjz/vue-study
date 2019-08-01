@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="../vue.js"></script>
+		<title>组件使用中的细节点</title>
+	</head>
+	<body>
+
+		<!-- <div id="app">
+			<table>
+				<tbody>
+					<tr is="row"></tr>
+					<tr is="row"></tr>
+					<tr is="row"></tr>
+				</tbody>
+			</table>
+		</div>
+		<script>
+			
+			//子组件中data 只能是方法  目的:保证被调用的组件中的数据的唯一性
+			Vue.component('row', {
+				data:function(){
+					return {
+						content: 'this is a new row'
+					}
+				},
+				template: '<tr><td>{{content}}</td></tr>'
+			})
+
+			//父组件中data是对象
+			var vm = new Vue({
+				data:{
+					
+				}
+				el: '#app',
+
+			})
+		</script> -->
+
+
+		<!-- 
+		ref 标签的使用 
+		子组件向父组件传值 通过emit(发出，放射)中间介质 连接父子的方法
+		父组件向子组件传值 通过属性
+		-->
+		<div id="app">
+			<counter :count="1" ref='one' @change="handleChange"></counter>
+			<counter :count="2" ref='two' @change="handleChange"></counter>
+			<div>sun：{{total}}</div>
+		</div>
+
+		<script>
+			//子组件
+			Vue.component('counter', {
+				props:['count'],
+				template: '<div @click="divClick">arg{{count}}: {{number}}</div>',
+				data: function() {
+					return {
+						number: 0
+					}
+				},
+				methods: {
+					divClick: function() {
+						this.number++;
+						//子组件向父组件传值触发的事件
+						this.$emit('change');
+					}
+				}
+			})
+
+			//父组件
+			var vm = new Vue({
+				el: '#app',
+				data: {
+					total: 0
+				},
+				methods: {
+					handleChange: function() {
+						console.log(this.$refs.one.number);
+						console.log(this.$refs.two.number);
+						this.total = this.$refs.one.number + this.$refs.two.number;
+					}
+				}
+			})
+		</script>
+
+	</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="../vue.js"></script>
+		<title>组件参数校验与非Props特性</title>
+	</head>
+	<body>
+
+
+		<div id="root">
+			<child content="hellll"></child>
+		</div>
+
+		<script>
+			Vue.component('child', {
+				props: {
+					//定义父组件传递过来的数据类型
+					content: {
+						type: String,
+						// required: false, //如果没有content 就显示默认值
+						// default: "default value",
+						validator: function(value) {  //校验器 对长度进行校验
+							return (value.length > 4)
+						}
+					}
+					// content:[String,Number]
+					// content: String
+				},
+				template: "<div>{{content}}</div>"
+			})
+
+			//父组件
+			var vm = new Vue({
+				el: '#root',
+			})
+		</script>
+
+	</body>
+</html>
