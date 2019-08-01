@@ -16,3 +16,8 @@
 3、[组件参数校验与非Props特性](https://github.com/szjzszjz/vue-study/blob/master/three/index.2.htm)  
 4、[给组件绑定原生事件](https://github.com/szjzszjz/vue-study/blob/master/three/index.3.htm)  
 5、[非父子组件传值(Bus/总线/发布订阅模式/观察者模式)](https://github.com/szjzszjz/vue-study/blob/master/three/index.4.htm)  
+6、[Vue 插槽](https://github.com/szjzszjz/vue-study/blob/master/three/index.5.htm)  
+7、[Vue 中的作用域插槽](https://github.com/szjzszjz/vue-study/blob/master/three/index.6.htm)  
+8、[动态组件与v-once指令](https://github.com/szjzszjz/vue-study/blob/master/three/index.7.htm)  
+## 第四章  
+1、[Vue中css动画原理](https://github.com/szjzszjz/vue-study/blob/master/four/index.0.htm)  

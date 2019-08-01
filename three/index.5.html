@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="../vue.js"></script>
+		<title>Vue 插槽</title>
+	</head>
+	<body>
+
+
+		<div id="root">
+			<child>
+				<!-- 通过slot给插槽起名字 叫 具名插槽 -->
+				<div class="header" slot="header">header</div>
+				<div class="footer" slot="footer">footer</div>
+
+			</child>
+		</div>
+
+		<script>
+			//子组件
+			Vue.component('child', {
+				//如果没有对应的具名插槽 则启用默认值
+				template: `<div>
+								<slot name='header'>
+									<h1>default header</h1>  
+								</slot>
+								<div class='content'>content</div>
+								<slot name='footer'></slot>
+
+						  </div>`
+			})
+
+			//父组件
+			var vm = new Vue({
+				el: '#root',
+			})
+		</script>
+
+	</body>
+</html>

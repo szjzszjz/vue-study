@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="../vue.js"></script>
+		<title>动态组件与v-once指令</title>
+	</head>
+	<body>
+
+		<div id="app">
+			<!-- 第一种写法 -->
+			<!-- <child-one v-if="type === 'child-one'"></child-one>
+			<child-two v-if="type === 'child-two'"></child-two> -->
+			<!-- 第二种写法：动态组件 -->
+			<component :is = type></component>
+			<button @click="btnClick">change</button>
+		</div>
+
+		<script>
+			//v-once指令 该标签内容第一次出现的时候 将内容放在内存中 避免了重复创建销毁的动作 减小了内存大的消耗
+			Vue.component('child-one', {
+				template: `<div v-once>child-one</div>`
+			})
+
+
+			Vue.component('child-two', {
+				template: `<div v-once>child-two</div>`
+			})
+
+			var vm = new Vue({
+				el: '#app',
+				data: {
+					type: 'child-one'
+				},
+				methods: {
+					btnClick: function() {
+						this.type = this.type === 'child-one' ? 'child-two' : 'child-one';
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
