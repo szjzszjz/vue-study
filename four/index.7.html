@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Vue中动画的封装</title>
+
+		<!-- 引入vue库 -->
+		<script src="../vue.js"></script>
+		<script src="../velocity.js"></script>
+
+	</head>
+	<body>
+
+		<div id="app">
+			<fade :show='show'>
+				<div>hello</div>
+			</fade>
+
+			<fade :show='show'>
+				<h1>world</h1>
+			</fade>
+
+			<button @click="btnClick">切换</button>
+
+		</div>
+
+		<script>
+			//利用插槽封装动画组件
+			Vue.component('fade', {
+				props: ['show'],
+				template: `
+					<transition 
+					@before-enter = 'handleBeforEnter'
+					 @enter = 'handleEnter'
+					 @after-enter= 'handleAfterEnter'>
+						<slot v-if="show"></slot>
+					</transition>
+				`,
+				methods:{
+					handleBeforEnter:function(el){
+						el.style.color= 'red'
+						
+					},
+					handleEnter:function(el,done){
+						setTimeout(function() {
+							el.style.color = 'green'
+						}, 2000);
+						
+						setTimeout(function() {
+							el.style.color = 'black'
+							done()
+						}, 4000);
+					},
+					handleAfterEnter:function(el){
+						el.style.color = 'yellow'
+						
+					}
+				}
+				
+			})
+
+			var vm = new Vue({
+				el: '#app',
+				data: {
+					show: true
+				},
+				methods: {
+					btnClick: function() {
+						this.show = !this.show;
+					}
+					
+				}
+
+
+			})
+		</script>
+
+	</body>
+</html>

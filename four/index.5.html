@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Vue中多个元素或组件的过渡动画</title>
+
+		<!-- 引入vue库 -->
+		<script src="../vue.js"></script>
+
+		<style>
+			.v-enter,
+			.v-leave-to {
+				opacity: 0;
+			}
+
+			.v-enter-active,
+			.v-leave-active {
+				transition: opacity 1s;
+			}
+		</style>
+	</head>
+	<body>
+
+		<!-- mode='out-in' 先隐藏再显示 -->
+		<!-- mode='in-out' 先显示再隐藏 -->
+		<!-- <div id="app">
+			<transition mode='out-in'>
+				<div v-if="show" key='hello'>hello world</div>
+				<div v-else key='bye'>bye world</div>
+			</transition>
+			<button @click="btnClick">动画</button>
+		</div>
+
+		<script>
+			var vm = new Vue({
+				el: '#app',
+				data: {
+					show: true
+				},
+				methods: {
+					btnClick: function() {
+						this.show = !this.show;
+					},
+				}
+			})
+		</script> -->
+
+
+		<!-- //动态组件的动画 -->
+		<div id="app">
+			<transition mode='out-in'>
+				<!-- 普通组件 -->
+				<!-- <child-one v-if="show"></child-one>
+				<child-two v-else></child-two> -->
+				
+				<!-- 动态组件 -->
+				<component :is='type'></component>
+			</transition>
+			<button @click="btnClick">动画</button>
+		</div>
+
+		<script>
+			Vue.component('child-one', {
+				template: '<div>child-one</div>'
+			})
+
+			Vue.component('child-two', {
+				template: '<div>child-two</div>'
+			})
+
+			var vm = new Vue({
+				el: '#app',
+				data: {
+					show: true,
+					type: 'child-one'
+				},
+				methods: {
+					btnClick: function() {
+						this.show = !this.show;
+						this.type = this.type === 'child-one' ? 'child-two' : 'child-one';
+					},
+				}
+			})
+		</script>
+	</body>
+</html>
