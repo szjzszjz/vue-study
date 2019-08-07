@@ -1,0 +1,33 @@
+#bag {
+	width: 200px;
+	height: 500px;
+	margin: 0 auto;
+	background: url(img/bag.png) center no-repeat;
+	border: 1px solid red;
+	background-size: 80%;
+	/* //图片在容器中的大小 */
+}
+
+#bag.burst {
+	background-image: url(img/bag-burst.png);
+}
+
+#bag-health{
+	width: 200px;
+	height: 20px;
+	border: 2px solid #FF0000;
+	margin: 30px auto;
+}
+
+#bag-health-bar{
+	height: 20px;
+	background: crimson;
+}
+
+#controls{
+	width: 200px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+
